@@ -14,13 +14,36 @@ function Board(props) {
 
     useEffect(() => {
         fetchBoard().then(data => setBoard(data));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    useEffect(() => {
+        saveBoard();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [board]);
+
     async function fetchBoard() {
-        const response = await fetch('/board');
+        const response = await fetch('/board', {
+            headers: {
+                "Authorization": "Bearer " + props.token
+            }
+        });
         const data = await response.json();
-        console.log(data);
         return data.board;
+    }
+
+    async function saveBoard() {
+        const response = await fetch('/board', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": "Bearer " + props.token
+            },
+            body: JSON.stringify(board),
+        });
+        const data = await response.json();
+        return data;
+
     }
 
     function onDragEnd(result) {
