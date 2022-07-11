@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Register(props) {
     const [username, setUsername] = useState('');
@@ -12,7 +12,7 @@ function Register(props) {
         createUser().then(data => {
             props.setToken(data.access_token);
             localStorage.setItem('token', JSON.stringify(data.access_token));
-            history.push('/');
+            history('/');
         })
     }
 

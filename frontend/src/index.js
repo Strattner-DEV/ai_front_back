@@ -11,7 +11,8 @@ function App() {
       <BrowserRouter>
         <Routes >
           <Route path="/register" element={<Register setToken={setToken}/>}/>
-          <Route path="/" element={token? <Board token={token}/> : <Navigate to="/register" replace/>}/>
+          {/* <Route path="/" element={token? <Board token={token}/> : <Navigate to="/register" replace/>}/> */}
+          <Route path="/" element={<Board token={token}/>}/>
           <Route path="*" element={<Navigate to="/" replace />}/>
         </Routes>
       </BrowserRouter>
