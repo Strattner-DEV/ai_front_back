@@ -22,6 +22,7 @@ function AddTask(props) {
         const newTask = {
             id: newTaskId,
             content: content,
+            priority: 0,
         }
 
         props.setBoard({

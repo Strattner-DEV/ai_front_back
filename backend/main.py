@@ -1,6 +1,6 @@
 from pickle import FALSE
 import jwt 
-
+import json
 from copyreg import add_extension
 from passlib.hash import bcrypt
 from fastapi import FastAPI, Depends, HTTPException, status
@@ -18,6 +18,7 @@ app = FastAPI()
 class Task(BaseModel):
     id: str
     content: str
+    priority: int
 
 class Tasks(BaseModel):
     __root__: dict[str, Task]
@@ -69,16 +70,29 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
 
     return await User_Pydantic.from_tortoise_orm(user)
 
-
 @app.get('/board')
 async def get_board(user: User_Pydantic = Depends(get_current_user)):
     user = await User.get(id=user.id)
-    return {'board': user.board }
+    print(user.board)
+    return {'board': user.board}
+
 
 @app.post('/board')
 async def save_board(board: Board, user: User_Pydantic = Depends(get_current_user)):
     user = await User.get(id=user.id)
     user.board = board.json()
+    await user.save()
+
+    return {"status": "success"}
+
+number = 1
+
+@app.post('/add_task')
+async def add_task(id_number: int, content: str, priority: int, user: User_Pydantic = Depends(get_current_user)):
+    user = await User.get(id=user.id)
+    print(user.board)
+    user.board["tasks"].update({f'task-{id_number}' : {'id' : f'task-{id_number}', 'content' : f'{content}','priority' : priority}})
+    user.board["columns"]["column-405449"]["taskIds"].append(f'task-{id_number}')
     await user.save()
 
     return {"status": "success"}
@@ -105,8 +119,6 @@ async def generate_token(form_data: OAuth2PasswordRequestForm = Depends()):
     user_obj = await User_Pydantic.from_tortoise_orm(user)
     token = jwt.encode(user_obj.dict(), JWT_SECRET)
     return {"access_token": token}
-
-
 
 register_tortoise(
     app,
