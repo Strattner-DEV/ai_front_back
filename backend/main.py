@@ -71,13 +71,13 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
 
 
 @app.get('/board')
-async def get_board(): #user: User_Pydantic = Depends(get_current_user)
-    user = await User.get(id=1)
+async def get_board(user: User_Pydantic = Depends(get_current_user)):
+    user = await User.get(id=user.id)
     return {'board': user.board }
 
 @app.post('/board')
-async def save_board(board: Board):
-    user = await User.get(id=1)
+async def save_board(board: Board, user: User_Pydantic = Depends(get_current_user)):
+    user = await User.get(id=user.id)
     user.board = board.json()
     await user.save()
 
