@@ -87,12 +87,12 @@ async def save_board(board: Board, user: User_Pydantic = Depends(get_current_use
 
 number = 1
 
-@app.post('/add_task')
+@app.post('/add_task') #TODO: Encontrar forma de pegar o valor da coluna certa
 async def add_task(id_number: int, content: str, priority: int, user: User_Pydantic = Depends(get_current_user)):
     user = await User.get(id=user.id)
     print(user.board)
     user.board["tasks"].update({f'task-{id_number}' : {'id' : f'task-{id_number}', 'content' : f'{content}','priority' : priority}})
-    user.board["columns"]["column-405449"]["taskIds"].append(f'task-{id_number}')
+    user.board["columns"]["column-109166"]["taskIds"].append(f'task-{id_number}')
     await user.save()
 
     return {"status": "success"}

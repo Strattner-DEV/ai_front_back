@@ -1,0 +1,10 @@
+import requests
+from requests.structures import CaseInsensitiveDict
+
+url = "http://127.0.0.1:8000/board"
+
+headers = CaseInsensitiveDict()
+headers["Authorization"] = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjcsInVzZXJuYW1lIjoidGVzdDMiLCJwYXNzd29yZCI6IiQyYiQxMiRJemxBQUtlSjdSTDk4M0pJaVNzL1YubGJOTW02MVFDbXJjdzRpMzZFOFlvUnY3QmdDQmlMNiIsImJvYXJkIjp7InRhc2tzIjp7fSwiY29sdW1ucyI6eyJjb2x1bW4tMjA2NDMxIjp7ImlkIjoiY29sdW1uLTIwNjQzMSIsInRpdGxlIjoidG8gZG8iLCJ0YXNrSWRzIjpbXX19LCJjb2x1bW5PcmRlciI6WyJjb2x1bW4tMjA2NDMxIl19fQ.27_bXnObSy6qndU24d5vPLbOvqHRMlj-96S8U7XT1Pc"
+
+resp = requests.get(url, headers=headers)
+print(resp.json())
