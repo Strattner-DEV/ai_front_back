@@ -40,7 +40,31 @@ class User(Model):
     id = fields.IntField(pk=True)
     username = fields.CharField(50, unique=True)
     password = fields.CharField(200)
-    board = fields.JSONField(default={"tasks": {}, "columns": {},"columnOrder": [] })
+    board = fields.JSONField(default={
+    "tasks": {},
+    "columns": {
+      "column-1": {
+        "id": "column-1",
+        "title": "To do",
+        "taskIds": []
+      },
+      "column-2": {
+        "id": "column-2",
+        "title": "Done",
+        "taskIds": []
+      },
+      "column-3": {
+        "id": "column-3",
+        "title": "In progress",
+        "taskIds": []
+      }
+    },
+    "columnOrder": [
+      "column-1",
+      "column-2",
+      "column-3"
+    ]
+  })
 
     def verify_password(self, password):
         return bcrypt.verify(password, self.password)
@@ -92,7 +116,7 @@ async def add_task(id_number: int, content: str, priority: int, user: User_Pydan
     user = await User.get(id=user.id)
     print(user.board)
     user.board["tasks"].update({f'task-{id_number}' : {'id' : f'task-{id_number}', 'content' : f'{content}','priority' : priority}})
-    user.board["columns"]["column-109166"]["taskIds"].append(f'task-{id_number}')
+    user.board["columns"]["column-1"]["taskIds"].append(f'task-{id_number}')
     await user.save()
 
     return {"status": "success"}

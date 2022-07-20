@@ -1,14 +1,14 @@
 import requests
 from requests.structures import CaseInsensitiveDict
 
-id_number = 745646
+id_number = 555
 content = "The world is yours"
 priority = 1
 
-url = f"http://127.0.0.1:8000/add_task?id_number={id_number}&content={content}&priority={priority}"
+url = f"http://localhost:8000/add_task?id_number={id_number}&content={content}&priority={priority}"
 
 headers = CaseInsensitiveDict()
-headers["Authorization"] = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MjcsInVzZXJuYW1lIjoidGVzdDMiLCJwYXNzd29yZCI6IiQyYiQxMiRJemxBQUtlSjdSTDk4M0pJaVNzL1YubGJOTW02MVFDbXJjdzRpMzZFOFlvUnY3QmdDQmlMNiIsImJvYXJkIjp7InRhc2tzIjp7InRhc2stMSI6eyJpZCI6InRhc2stMSIsImNvbnRlbnQiOiJ1eWlvdXkiLCJwcmlvcml0eSI6MH19LCJjb2x1bW5zIjp7ImNvbHVtbi00MzA5MzYiOnsiaWQiOiJjb2x1bW4tNDMwOTM2IiwidGl0bGUiOiJ0ZXN0IiwidGFza0lkcyI6WyJ0YXNrLTEiXX19LCJjb2x1bW5PcmRlciI6WyJjb2x1bW4tNDMwOTM2Il19fQ.3p33UL2AEc3k-k1ilwGyqQm2-Bch27WP1J3r6CzF0zA"
+headers["Authorization"] = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MzUsInVzZXJuYW1lIjoidGVzdDciLCJwYXNzd29yZCI6IiQyYiQxMiQ3SkovVnBMSGFUVjJqN1FwbHJsRkouV2JFY2tlUFRycjZYLkVFV3k5QTVyMXNFazZpMFRxYSIsImJvYXJkIjp7InRhc2tzIjp7fSwiY29sdW1ucyI6eyJjb2x1bW4tMSI6eyJpZCI6ImNvbHVtbi0xIiwidGl0bGUiOiJUbyBkbyIsInRhc2tJZHMiOltdfSwiY29sdW1uLTIiOnsiaWQiOiJjb2x1bW4tMiIsInRpdGxlIjoiRG9uZSIsInRhc2tJZHMiOltdfSwiY29sdW1uLTMiOnsiaWQiOiJjb2x1bW4tMyIsInRpdGxlIjoiSW4gcHJvZ3Jlc3MiLCJ0YXNrSWRzIjpbXX19LCJjb2x1bW5PcmRlciI6WyJjb2x1bW4tMSIsImNvbHVtbi0yIiwiY29sdW1uLTMiXX19.9AY6cLIggbldwuiSLAZj_1RY8TiuCNCjZKZ1Lp_fwR8"
 headers["Content-Type"] = "application/json"
 headers["Content-Length"] = "0"
 
