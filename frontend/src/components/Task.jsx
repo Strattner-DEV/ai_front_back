@@ -35,11 +35,12 @@ function Task(props) {
         });
     }
 
+
     return (
         <Draggable draggableId={props.task.id} index={props.index}>
             {provided => (
                 <Container {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                    {props.task.content}
+                    {props.task.content}{" - "}{props.task.priority}
                     <span onClick={() => deleteTask(props.columnId, props.index, props.task.id)}> X</span>
                 </Container>
             )}
